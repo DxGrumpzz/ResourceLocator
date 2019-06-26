@@ -1,2 +1,2 @@
 # ResourceLocator
-A resource locator that finds embedded resources in .NET applications
+A resource locator that finds embedded resources in C# applications
