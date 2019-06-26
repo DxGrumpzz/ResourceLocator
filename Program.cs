@@ -21,9 +21,6 @@ namespace ResourceLocator
         {
             _currentAssembly = assembly;
         }
-
-
-
     }
 
 
