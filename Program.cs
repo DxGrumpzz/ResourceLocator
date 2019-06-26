@@ -1,48 +1,24 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-
-namespace ResourceLocator
+﻿namespace ResourceLocator
 {
-
-    /// <summary>
-    /// A resource locator that finds embedded resources in an application
-    /// </summary>
-    public class ResourceLocator
-    {
-        private Assembly _currentAssembly;
-
-        /// <summary>
-        /// Default constructor. Creates a default assembly from the calling function
-        /// </summary>
-        public ResourceLocator() : 
-            this(Assembly.GetCallingAssembly())
-        {
-        }
-
-        public ResourceLocator(Assembly assembly)
-        {
-            _currentAssembly = assembly;
-        }
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Linq;
 
 
-        #region Public functions
-
-        public ManifestResourceInfo FindResource(string resourceName)
-        {
-            ManifestResourceInfo resource = _currentAssembly.GetManifestResourceInfo(resourceName);
-
-            return resource;
-        }
-
-        #endregion
-    }
+    
 
 
     class Program
     {
         static void Main(string[] args)
         {
+            var executingAssembly = Assembly.GetExecutingAssembly();
+
+            string resourceName = "DemoUserImage.png";
+
+
+
             Console.WriteLine("Hello World!");
         }
     }
