@@ -7,9 +7,8 @@
     /// </summary>
     public class ResourceInfo
     {
-
         public string ResourceName { get; set; }
         public Stream ResourceStream { get; set; }
-
+        public string ResourceFullname { get; set; }
     }
 }
