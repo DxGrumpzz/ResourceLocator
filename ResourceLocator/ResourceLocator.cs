@@ -5,6 +5,7 @@
     using System.Reflection;
     using System.Linq;
     using System.IO;
+    using System.Text;
 
     /// <summary>
     /// A resource locator that finds embedded resources in an application
@@ -64,6 +65,7 @@
             {
                 ResourceName = resourceName,
                 ResourceStream = resourceStream,
+                ResourceFullname = FormatResourceFullname(foundResource),
             };
         }
 
@@ -94,10 +96,31 @@
                 {
                     ResourceName = resourceNames.ElementAt(indexer),
                     ResourceStream = resourceStream,
+                    ResourceFullname = FormatResourceFullname(_resourceName),
                 };
 
                 indexer++;
             };
+        }
+
+        #endregion
+
+        #region Private functions
+
+        /// <summary>
+        /// Returns a new string containing a formatted resource name instead of '.' it will change to '\'
+        /// </summary>
+        /// <param name="resourceFullname"> </param>
+        /// <returns></returns>
+        private string FormatResourceFullname(string resourceFullname)
+        {
+            StringBuilder stringBuilder = new StringBuilder(resourceFullname);
+
+            // Replace characters
+            stringBuilder.Remove(0, nameof(ResourceLocator).Length);
+            stringBuilder.Replace('.', '\\');
+
+            return stringBuilder.ToString();
         }
 
         #endregion
