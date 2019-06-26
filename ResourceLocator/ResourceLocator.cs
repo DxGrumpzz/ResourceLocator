@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Text;
     using System.Linq;
     using System.IO;
 
@@ -12,7 +11,7 @@
     /// </summary>
     public class ResourceLocator
     {
-    
+
         #region Private fields
 
         /// <summary>
@@ -58,13 +57,46 @@
                 FirstOrDefault(_resourceName => _resourceName.Contains(resourceName));
 
             // Gets the resource's data stream
-            Stream resourceStream  = _currentAssembly.GetManifestResourceStream(foundResource);
+            Stream resourceStream = _currentAssembly.GetManifestResourceStream(foundResource);
 
 
             return new ResourceInfo()
             {
                 ResourceName = resourceName,
                 ResourceStream = resourceStream,
+            };
+        }
+
+
+        /// <summary>
+        /// Finds embedded resources by name. Returns a list of matching results
+        /// </summary>
+        /// <param name="resourceNames"> The name of the resource </param>
+        /// <returns> Returns an <see cref="IEnumerable{T}"/> that contains ResourceInfo </returns>
+        public IEnumerable<ResourceInfo> FindResources(IEnumerable<string> resourceNames)
+        {
+            var foundResources = _resourceNames.
+            // Finds matching resource names in current assembly 
+            Where(new Func<string, int, bool>((_resourceName, _indexer) =>
+            {
+                _resourceName.Contains(resourceNames.ElementAt(_indexer));
+                return true;
+            }));
+
+
+            int indexer = 0;
+            foreach (string _resourceName in foundResources)
+            {
+                // Gets the resource's data stream
+                Stream resourceStream = _currentAssembly.GetManifestResourceStream(_resourceName);
+
+                yield return new ResourceInfo()
+                {
+                    ResourceName = resourceNames.ElementAt(indexer),
+                    ResourceStream = resourceStream,
+                };
+
+                indexer++;
             };
         }
 
