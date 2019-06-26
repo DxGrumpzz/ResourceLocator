@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <None Remove="Resources\DemoUserImage-Duplicate.png" />
+    <None Remove="Resources\Images\DemoUserImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DemoUserImage-Duplicate.png" />
+    <EmbeddedResource Include="Resources\Images\DemoUserImage.png" />
   </ItemGroup>
 
 </Project>
