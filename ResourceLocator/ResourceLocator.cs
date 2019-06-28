@@ -116,8 +116,10 @@
         {
             StringBuilder stringBuilder = new StringBuilder(resourceFullname);
 
+            var projectName = _currentAssembly.GetName().Name;
+
             // Replace characters
-            stringBuilder.Remove(0, nameof(ResourceLocator).Length);
+            stringBuilder.Remove(0, projectName.Length);
             stringBuilder.Replace('.', '\\');
 
             return stringBuilder.ToString();
