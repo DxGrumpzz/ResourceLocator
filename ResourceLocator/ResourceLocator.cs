@@ -116,6 +116,7 @@
         {
             StringBuilder stringBuilder = new StringBuilder(resourceFullname);
 
+            // The name of the current project
             var projectName = _currentAssembly.GetName().Name;
 
             // Replace characters
